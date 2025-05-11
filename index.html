@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portail Laboratoire-Facturation</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>Portail Laboratoire - Facturation</h1>
+        <div class="user-info">
+            <span id="current-user">Technicien: [Nom Technicien]</span>
+            <span id="current-time"></span>
+            <button id="logout">Déconnexion</button>
+        </div>
+    </header>
+
+    <main>
+        <section class="status-panel">
+            <h2>Statut du Laboratoire</h2>
+            <div class="status-controls">
+                <label for="lab-status">Statut actuel:</label>
+                <select id="lab-status">
+                    <option value="ouvert">Ouvert - Analyses normales</option>
+                    <option value="reduit">Service réduit</option>
+                    <option value="urgence">Urgences seulement</option>
+                    <option value="ferme">Fermé</option>
+                </select>
+                <button id="update-status">Mettre à jour</button>
+            </div>
+            <div class="current-status">
+                <strong>Dernière mise à jour:</strong> <span id="last-update"></span>
+                <p id="status-message"></p>
+            </div>
+        </section>
+
+        <section class="exams-panel">
+            <h2>Disponibilité des Analyses</h2>
+            <div class="exam-controls">
+                <input type="text" id="exam-search" placeholder="Rechercher une analyse...">
+                <button id="add-exam">+ Ajouter une analyse</button>
+            </div>
+            <table id="exams-table">
+                <thead>
+                    <tr>
+                        <th>Code Analyse</th>
+                        <th>Nom Analyse</th>
+                        <th>Disponible</th>
+                        <th>Délai</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Rempli dynamiquement -->
+                </tbody>
+            </table>
+        </section>
+
+        <section class="notifications">
+            <h2>Messages pour la Facturation</h2>
+            <textarea id="notification-text" placeholder="Entrez un message pour le service de facturation..."></textarea>
+            <button id="send-notification">Envoyer Message</button>
+            <div class="notification-history">
+                <h3>Historique des Messages</h3>
+                <ul id="notification-list">
+                    <!-- Rempli dynamiquement -->
+                </ul>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>Système de communication Laboratoire-Facturation &copy; 2023</p>
+    </footer>
+
+    <!-- Modals -->
+    <div id="exam-modal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Ajouter/Modifier une Analyse</h2>
+            <form id="exam-form">
+                <input type="hidden" id="exam-id">
+                <div class="form-group">
+                    <label for="exam-code">Code Analyse:</label>
+                    <input type="text" id="exam-code" required>
+                </div>
+                <div class="form-group">
+                    <label for="exam-name">Nom Analyse:</label>
+                    <input type="text" id="exam-name" required>
+                </div>
+                <div class="form-group">
+                    <label for="exam-available">Disponible:</label>
+                    <select id="exam-available">
+                        <option value="oui">Oui</option>
+                        <option value="non">Non</option>
+                        <option value="limite">Limité</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="exam-delay">Délai (heures):</label>
+                    <input type="number" id="exam-delay" min="1" value="24">
+                </div>
+                <div class="form-group">
+                    <label for="exam-notes">Notes:</label>
+                    <textarea id="exam-notes"></textarea>
+                </div>
+                <button type="submit">Enregistrer</button>
+            </form>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
