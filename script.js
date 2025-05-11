@@ -1,24 +1,4 @@
 // Données initiales
-const expectedPassword = "motdepasse-securise"; // À changer en production
-
-function checkAuth() {
-  const storedAuth = localStorage.getItem('lab-auth');
-  if (!storedAuth || storedAuth !== expectedPassword) {
-    const password = prompt("Entrez le mot de passe du laboratoire:");
-    if (password !== expectedPassword) {
-      alert("Accès refusé");
-      window.location.href = "about:blank";
-      return false;
-    }
-    localStorage.setItem('lab-auth', password);
-  }
-  return true;
-}
-
-if (!checkAuth()) {
-  // Bloquer l'accès si non authentifié
-  document.body.innerHTML = "<h1>Accès non autorisé</h1>";
-  throw new Error("Authentification requise");
 let currentUser = {
     id: 'tech123',
     name: 'Technicien de Garde',
@@ -378,8 +358,3 @@ function loadSavedData() {
 // Initialiser l'application
 loadSavedData();
 init();
-setInterval(() => {
-  localStorage.setItem('exams-backup', JSON.stringify(exams));
-  localStorage.setItem('notifications-backup', JSON.stringify(notifications));
-  console.log("Sauvegarde automatique effectuée");
-}, 60000); // Toutes les minutes
